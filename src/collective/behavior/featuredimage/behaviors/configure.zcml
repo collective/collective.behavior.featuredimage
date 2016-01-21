@@ -1,0 +1,16 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="collective.behavior.featuredimage">
+
+  <include package="plone.behavior" file="meta.zcml" />
+
+  <plone:behavior
+      title="Featured Image"
+      description="Extra fields to get Featured Image."
+      provides="collective.behavior.featuredimage.behaviors.interfaces.IFeaturedImage"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      />
+
+</configure>

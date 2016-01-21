@@ -1,0 +1,23 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="collective.behavior.featuredimage" >
+
+  <browser:page
+      for="collective.behavior.featuredimage.behaviors.interfaces.IFeaturedImage"
+      name="featuredimage"
+      class=".views.FeaturedImage"
+      template="templates/featuredimage.pt"
+      permission="zope.Public"
+      layer="collective.behavior.featuredimage.interfaces.IBrowserLayer"
+      />
+
+  <browser:viewlet
+      name="featuredimage.meta"
+      for="collective.behavior.featuredimage.behaviors.interfaces.IFeaturedImage"
+      manager="plone.app.layout.viewlets.interfaces.IHtmlHead"
+      class=".viewlets.FeaturedImageMetaTagViewlet"
+      layer="collective.behavior.featuredimage.interfaces.IBrowserLayer"
+      template="templates/meta.pt"
+      permission="zope2.View"
+      />
+</configure>

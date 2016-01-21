@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    i18n:domain="collective.behavior.featuredimage"
+    tal:define="portal_url context/portal_url">
+  <head>
+    <link rel="stylesheet"
+        type="text/css"
+        tal:attributes="href string:$portal_url/++resource++collective.behavior.featuredimage/main.css" />
+  </head>
+  <body>
+    <div id="featuredimage">
+      <img alt="Featured Image Base"
+          tal:attributes="src string:$portal_url/@@featuredimage-settings/++widget++form.widgets.base_image/@@download">
+      <div class="quote">
+        <div class="text">
+          <span tal:replace="view/quote"></span>
+        </div>
+        <div class="author"
+            tal:content="view/author"></div>
+      </div>
+    </div>
+  </body>
+</html>

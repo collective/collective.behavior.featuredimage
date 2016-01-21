@@ -1,0 +1,11 @@
+{
+  "generator-backbone": {
+    "appPath": "app",
+    "appName": "CollectiveBehaviorFeaturedimage",
+    "coffee": true,
+    "testFramework": "mocha",
+    "templateFramework": "lodash",
+    "sassBootstrap": true
+  },
+  "generator-mocha": {}
+}

@@ -56,8 +56,8 @@ class RegistryTestCase(unittest.TestCase):
         self.settings = self.registry.forInterface(IPackageSettings)
 
     def test_available_sections_record_in_registry(self):
-        self.assertTrue(hasattr(self.settings, 'option'))
-        self.assertEqual(self.settings.option, u'')
+        self.assertTrue(hasattr(self.settings, 'base_image'))
+        self.assertEqual(self.settings.base_image, None)
 
     def test_records_removed_on_uninstall(self):
         qi = self.portal['portal_quickinstaller']

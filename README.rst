@@ -9,6 +9,25 @@ Life, the Universe, and Everything
 
 A behavior for Dexterity-based content types to add a featured image for sharing content on social media.
 
+Use cases
+^^^^^^^^^
+
+Suppose you are running The Planet, a news portal that has a bunch of editors
+focused on getting news on different topics, like Economy, Health or Sports.
+
+Sometimes your news have a great catchphrase, and you want to add more appeal in this phrase
+writing it into the image you share.
+
+This package allows you to automatize this image creation with the text embedded, and set this image as a
+featured image of your news.
+
+.. figure:: https://raw.github.com/collective/collective.behavior.featuredimage/master/docs/featuredimage-example.png
+    :align: center
+    :height: 600px
+    :width: 907px
+
+    Featured Image example.
+
 Mostly Harmless
 ---------------
 
@@ -28,6 +47,9 @@ Don't Panic
 
 Installation
 ^^^^^^^^^^^^
+
+This package uses `PhantomJS <http://phantomjs.org/>`_ to create an image from html, so you need to `install phantomjs first <http://phantomjs.org/download.html>`_
+following the instructions from your operating system.
 
 To enable this package in a buildout-based installation:
 
@@ -50,3 +72,61 @@ Check the box next to ``collective.behavior.featuredimage`` and click the 'Activ
 
 Usage
 ^^^^^
+
+This add-on includes a behavior to add four extra fields on Dexterity-based content types:
+
+Enabled
+    Used to indicate that this content should use the featured image.
+    This field is turned on by default.
+Quote
+    The catchphrase you want to be embedded into the image.
+    This field is filled by default with the content title.
+Author
+    The author of the catchphrase.
+Featured Image
+    The featured image generated.
+    This field is readonly.
+
+Configuring the Behavior
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Add the base image in the control panel configlet.
+
+.. figure:: https://raw.github.com/collective/collective.behavior.featuredimage/master/docs/featuredimage-controlpanel.png
+    :align: center
+    :height: 380px
+    :width: 780px
+
+    Featured Image control panel configlet.
+
+Enabling the Behavior
+^^^^^^^^^^^^^^^^^^^^^
+
+* In 'Site Setup', select the Dexterity Content Types configlet
+* Select your content type
+* Go to Behaviors tab and select Featured Image
+
+A new fieldset called Featured Image will be present in the edit form of your content type.
+
+.. figure:: https://raw.github.com/collective/collective.behavior.featuredimage/master/featuredimage-behavior.png
+    :align: center
+    :height: 380px
+    :width: 780px
+
+    Featured Image behavior in action.
+
+Development
+^^^^^^^^^^^
+This buildout already install PhantomJS, to start the instance using the buildout phantomjs, use:
+
+    buildout_dir$ PATH=`pwd`/bin:$PATH ./bin/instance fg
+
+We use yeoman and grunt to build static files, to start grunt serve run:
+
+    buildout_dir$ ./bin/grunt_serve
+
+Then open the browser at http://localhost:9000 and edit the files at directory yeoman/app to customize the static files.
+
+To build the static files run:
+
+    buildout_dir$ ./bin/grunt_build

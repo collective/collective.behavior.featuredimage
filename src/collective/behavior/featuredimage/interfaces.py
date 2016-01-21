@@ -14,9 +14,8 @@ class IPackageSettings(form.Schema):
 
     """Schema for the control panel form."""
 
-    option = schema.TextLine(
-        title=_(u'Option'),
-        description=_(u''),
-        required=True,
-        default=u'',
+    base_image = schema.ASCII(
+        title=_(u'Base image'),
+        description=_(u'Base image used to create featured image.'),
+        required=False,
     )

@@ -7,10 +7,10 @@
 
   <five:registerPackage package="." />
 
-  <permission
-      id="collective.behavior.featuredimage.AddExample"
-      title="collective.behavior.featuredimage: Add Example"
-      />
+  <include package="Products.CMFCore" file="permissions.zcml" />
+
+  <include package=".behaviors" />
+  <include package=".browser" />
 
   <include file="profiles.zcml" />
 
@@ -25,6 +25,18 @@
       name="collective.behavior.featuredimage"
       directory="static"
       layer="collective.behavior.featuredimage.interfaces.IBrowserLayer"
+      />
+
+  <subscriber
+      for="collective.behavior.featuredimage.behaviors.interfaces.IFeaturedImage
+           zope.lifecycleevent.IObjectAddedEvent"
+      handler="collective.behavior.featuredimage.subscriber.update_featuredimage"
+      />
+
+  <subscriber
+      for="collective.behavior.featuredimage.behaviors.interfaces.IFeaturedImage
+           zope.lifecycleevent.IObjectModifiedEvent"
+      handler="collective.behavior.featuredimage.subscriber.update_featuredimage"
       />
 
 </configure>

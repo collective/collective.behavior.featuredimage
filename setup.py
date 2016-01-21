@@ -42,6 +42,7 @@ setup(
         'plone.directives.form',
         'Products.CMFPlone >=4.3',
         'Products.GenericSetup',
+        'selenium',
         'setuptools',
         'zope.i18nmessageid',
         'zope.interface',
