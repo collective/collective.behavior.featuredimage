@@ -1,0 +1,30 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="collective.behavior.featuredimage">
+
+  <genericsetup:registerProfile
+      name="default"
+      title="collective.behavior.featuredimage"
+      directory="profiles/default"
+      description="Installs collective.behavior.featuredimage."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      i18n:attributes="title; description"
+      />
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="collective.behavior.featuredimage: Remoção do Pacote"
+      directory="profiles/uninstall"
+      description="Uninstalls collective.behavior.featuredimage."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      i18n:attributes="title; description"
+      />
+
+  <include package=".upgrades" />
+
+  <utility factory=".setuphandlers.HiddenProducts" name="collective.behavior.featuredimage" />
+  <utility factory=".setuphandlers.HiddenProfiles" name="collective.behavior.featuredimage" />
+
+</configure>

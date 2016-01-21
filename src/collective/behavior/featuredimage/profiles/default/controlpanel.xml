@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<object name="portal_controlpanel"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    i18n:domain="collective.behavior.featuredimage"
+    purge="False">
+  <configlet title="collective.behavior.featuredimage"
+      action_id="featuredimage"
+      appId="collective.behavior.featuredimage"
+      category="Products"
+      condition_expr=""
+      url_expr="string:${portal_url}/@@featuredimage-settings"
+      icon_expr="string:${portal_url}/++resource++collective.behavior.featuredimage/featuredimage-icon.png"
+      visible="True"
+      i18n:attributes="title">
+    <permission>Manage portal</permission>
+  </configlet>
+</object>
