@@ -2,14 +2,23 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     xmlns:metal="http://xml.zope.org/namespaces/metal"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    lang="en"
     i18n:domain="collective.behavior.featuredimage"
-    tal:define="portal_url context/portal_url">
+    tal:define="portal_state context/@@plone_portal_state;
+        plone_view context/@@plone;
+        lang portal_state/language;
+        view nocall:view | nocall: plone_view;
+        dummy python: plone_view.mark_view(view);
+        portal_url portal_state/portal_url;
+        dummy python:request.RESPONSE.setHeader('X-UA-Compatible', 'IE=edge,chrome=1');"
+    tal:attributes="lang lang;">
   <head>
-    <link rel="stylesheet"
-        type="text/css"
-        tal:attributes="href string:$portal_url/++resource++collective.behavior.featuredimage/main.css" />
-  </head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <base tal:attributes="href plone_view/renderBase" /><!--[if lt IE 7]></base><![endif]-->
+
+    <div tal:replace="structure provider:plone.htmlhead" />
+    <link tal:replace="structure provider:plone.htmlhead.links" />
+</head>
   <body>
     <div id="featuredimage">
       <img alt="Featured Image Base"

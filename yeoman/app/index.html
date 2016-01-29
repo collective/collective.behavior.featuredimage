@@ -3,17 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title>Featured Image</title>
-    <!-- build:css(.tmp) main.css -->
-    <link rel="stylesheet" href="main.css">
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
   <body>
     <div id="featuredimage">
-      <img alt="Featured Image Base" src="featuredimage-base.png">
+      <img alt="Featured Image Base" src="images/featuredimage-base.png">
       <div class="quote">
         <div class="text">Give me six hours to chop down a tree and I will spend the first four sharpening the axe.</div>
         <span class="author">Abraham Lincoln</span>
       </div>
     </div>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
   </body>
 </html>
