@@ -12,12 +12,7 @@
         dummy python:request.RESPONSE.setHeader('X-UA-Compatible', 'IE=edge,chrome=1');"
     tal:attributes="lang lang;">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-    <base tal:attributes="href plone_view/renderBase" /><!--[if lt IE 7]></base><![endif]-->
-
     <div tal:replace="structure provider:plone.htmlhead" />
-    <link tal:replace="structure provider:plone.htmlhead.links" />
 </head>
   <body>
     <div id="featuredimage">

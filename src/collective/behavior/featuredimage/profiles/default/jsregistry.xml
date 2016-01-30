@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <object name="portal_javascripts" purge="False">
-  <javascript id="++resource++collective.behavior.featuredimage/scripts/main.js"
+  <javascript id="++resource++collective.behavior.featuredimage/main.js"
       cacheable="True" compression="none" cookable="True" enabled="True"
       expression="" inline="False" authenticated="False" insert-after="*" />
 </object>
