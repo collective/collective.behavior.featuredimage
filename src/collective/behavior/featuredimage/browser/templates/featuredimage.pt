@@ -5,7 +5,8 @@
     <div tal:replace="structure provider:plone.htmlhead" />
   </head>
   <body>
-    <div id="featuredimage">
+    <div id="featuredimage"
+        tal:attributes="class view/theme">
       <img alt="Featured Image Base"
           tal:attributes="src string:$portal_url/@@featuredimage-settings/++widget++form.widgets.base_image/@@download">
       <div class="quote">

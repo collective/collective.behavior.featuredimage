@@ -10,7 +10,12 @@
     <!-- endbuild -->
   </head>
   <body>
-    <div id="featuredimage">
+    <select id="theme" name="theme">
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+      <option value="custom">Custom</option>
+    </select>
+    <div id="featuredimage" class="light">
       <img alt="Featured Image Base"
           src="fixture/featuredimage-base.png">
       <div class="quote">
@@ -19,6 +24,19 @@
       </div>
     </div>
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script>
+      $(function() {
+        $('#theme').on('change', function() {
+          var option = $(this).val();
+          $('#featuredimage').attr('class', option);
+          if (option == 'dark') {
+            $('#featuredimage img').attr('src', 'fixture/featuredimage-base-dark.png');
+          } else {
+            $('#featuredimage img').attr('src', 'fixture/featuredimage-base.png');
+          }
+        });
+      });
+    </script>
     <script data-main="scripts/main"
         src="bower_components/requirejs/require.js"></script>
   </body>
