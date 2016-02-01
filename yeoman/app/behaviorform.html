@@ -1,0 +1,121 @@
+<!doctype html>
+<html class="no-js"
+    lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>Featured Image</title>
+    <link rel="stylesheet"
+        type="text/css"
+        media="screen"
+        href="fixture/reset.css" />
+    <link rel="stylesheet"
+        type="text/css"
+        media="screen"
+        href="fixture/public.css" />
+    <link rel="stylesheet"
+        type="text/css"
+        media="screen"
+        href="fixture/authoring.css" />
+    <link rel="stylesheet"
+        type="text/css"
+        media="screen"
+        href="fixture/forms.css" />
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet"
+        href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body>
+    <div id="content">
+      <h1 class="documentFirstHeading">Edit Teste</h1>
+      <div id="content-core">
+        <form class="rowlike enableUnloadProtection enableFormTabbing  kssattr-formname-edit"
+            action="http://localhost:8080/Plone/teste-1/@@edit"
+            method="post"
+            id="form"
+            enctype="multipart/form-data">
+          <ul class="formTabs">
+            <li class="formTab lastFormTab"><a id="fieldsetlegend-featured-image"
+                  href="#fieldsetlegend-featured-image"
+                  class="selected"><span>Featured Image</span></a></li>
+          </ul>
+          <fieldset data-fieldset="featured-image"
+              id="fieldset-featured-image"
+              class="kssattr-fieldset-featured-image formPanel"
+              style="display: block;">
+            <legend id="fieldsetlegend-featured-image"
+                style="visibility: hidden; font-size: 0px; padding: 0px; height: 0px; width: 0px; line-height: 0;">Featured Image</legend>
+            <div data-fieldname="form.widgets.IFeaturedImage.featuredimage_enabled"
+                class="field z3cformInlineValidation kssattr-fieldname-form.widgets.IFeaturedImage.featuredimage_enabled"
+                id="formfield-form-widgets-IFeaturedImage-featuredimage_enabled">
+              <span class="option"
+                  id="form-widgets-IFeaturedImage-featuredimage_enabled">
+                <input type="checkbox"
+                       id="form-widgets-IFeaturedImage-featuredimage_enabled-0"
+                       name="form.widgets.IFeaturedImage.featuredimage_enabled:list"
+                       class="single-checkbox-widget bool-field"
+                       value="selected"
+                       checked="checked"
+                       originalvalue="selected">
+                <label for="form-widgets-IFeaturedImage-featuredimage_enabled-0">
+                 <span class="label">Enable Featured Image</span>
+              </label>
+              </span>
+              <input name="form.widgets.IFeaturedImage.featuredimage_enabled-empty-marker"
+                  type="hidden"
+                  value="1"
+                  originalvalue="1">
+              <div class="formHelp">Enable featured image for this content</div>
+              <div class="fieldErrorBox"></div>
+            </div>
+            <div data-fieldname="form.widgets.IFeaturedImage.featuredimage_quote"
+                class="field z3cformInlineValidation kssattr-fieldname-form.widgets.IFeaturedImage.featuredimage_quote empty"
+                id="formfield-form-widgets-IFeaturedImage-featuredimage_quote">
+              <label for="form-widgets-IFeaturedImage-featuredimage_quote"
+                  class="horizontal">
+                Quote
+              </label>
+              <div class="fieldErrorBox"></div>
+              <input id="form-widgets-IFeaturedImage-featuredimage_quote"
+                  name="form.widgets.IFeaturedImage.featuredimage_quote"
+                  class="text-widget textline-field"
+                  value=""
+                  type="text"
+                  originalvalue="">
+            </div>
+            <div data-fieldname="form.widgets.IFeaturedImage.featuredimage_author"
+                class="field z3cformInlineValidation kssattr-fieldname-form.widgets.IFeaturedImage.featuredimage_author empty"
+                id="formfield-form-widgets-IFeaturedImage-featuredimage_author">
+              <label for="form-widgets-IFeaturedImage-featuredimage_author"
+                  class="horizontal">
+                Author
+              </label>
+              <div class="fieldErrorBox"></div>
+              <input id="form-widgets-IFeaturedImage-featuredimage_author"
+                  name="form.widgets.IFeaturedImage.featuredimage_author"
+                  class="text-widget textline-field"
+                  value=""
+                  type="text"
+                  originalvalue="">
+            </div>
+          </fieldset>
+          <div class="formControls">
+            <input id="form-buttons-save"
+                name="form.buttons.save"
+                class="submit-widget button-field context"
+                value="Save"
+                type="submit">
+            <input id="form-buttons-cancel"
+                name="form.buttons.cancel"
+                class="submit-widget button-field standalone"
+                value="Cancel"
+                type="submit">
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script data-main="scripts/main"
+        src="bower_components/requirejs/require.js"></script>
+  </body>
+</html>

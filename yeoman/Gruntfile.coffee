@@ -41,7 +41,8 @@ module.exports = (grunt) ->
           'postcss'
         ]
       livereload:
-        options: livereload: grunt.option('livereloadport') or LIVERELOAD_PORT
+        options:
+          livereload: grunt.option('livereloadport') or LIVERELOAD_PORT
         files: [
           '<%= yeoman.app %>/*.html'
           '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css'
@@ -62,37 +63,45 @@ module.exports = (grunt) ->
     connect:
       options:
         port: grunt.option('port') or SERVER_PORT
-        hostname: 'localhost'
-      livereload: options: middleware: (connect) ->
-        [
-          lrSnippet
-          mountFolder(connect, '.tmp')
-          mountFolder(connect, yeomanConfig.app)
-        ]
-      test: options:
-        port: 9001
-        middleware: (connect) ->
-          [
-            mountFolder(connect, 'test')
-            lrSnippet
-            mountFolder(connect, '.tmp')
-            mountFolder(connect, yeomanConfig.app)
-          ]
-      dist: options: middleware: (connect) ->
-        [ mountFolder(connect, yeomanConfig.dist) ]
+        hostname: '0.0.0.0'
+      livereload:
+        options:
+          middleware: (connect) ->
+            return [
+              lrSnippet
+              mountFolder(connect, '.tmp')
+              mountFolder(connect, yeomanConfig.app)
+            ]
+      test:
+        options:
+          port: 9001
+          middleware: (connect) ->
+            return [
+              mountFolder(connect, 'test')
+              lrSnippet
+              mountFolder(connect, '.tmp')
+              mountFolder(connect, yeomanConfig.app)
+            ]
+      dist:
+        options:
+          middleware: (connect) ->
+            return [ mountFolder(connect, yeomanConfig.dist) ]
     open:
-      server: path: 'http://localhost:<%= connect.options.port %>'
-      test: path: 'http://localhost:<%= connect.test.options.port %>'
+      server:
+        path: 'http://localhost:<%= connect.options.port %>'
+      test:
+        path: 'http://localhost:<%= connect.test.options.port %>'
     clean:
-      options: force: true
+      options:
+        force: true
       dist: [
         '.tmp'
         '<%= yeoman.dist %>/*'
       ]
       server: '.tmp'
-      afterbuild: [
+      aftercopy: [
         '<%= yeoman.dist %>/*.html'
-        '<%= yeoman.dist %>/images/featuredimage-base.png'
+        '<%= yeoman.dist %>/styles'
       ]
     jshint:
       options:
@@ -104,103 +113,152 @@ module.exports = (grunt) ->
         '!<%= yeoman.app %>/scripts/vendor/*'
         'test/spec/{,*/}*.js'
       ]
-    mocha: all: options:
-      run: true
-      urls: [ 'http://localhost:<%= connect.test.options.port %>/index.html' ]
+    mocha:
+      all:
+        options:
+          run: true
+          urls: [ 'http://localhost:<%= connect.test.options.port %>/index.html' ]
     coffee:
-      dist: files: [ {
+      dist:
+        files: [ {
+          expand: true
+          cwd: '<%= yeoman.app %>/scripts'
+          src: '{,*/}*.coffee'
+          dest: '.tmp/scripts'
+          ext: '.js'
+        } ]
+      test:
+        files: [ {
+          expand: true
+          cwd: 'test/spec'
+          src: '{,*/}*.coffee'
+          dest: '.tmp/spec'
+          ext: '.js'
+        } ]
+    csscomb:
+      dist:
         expand: true
-        cwd: '<%= yeoman.app %>/scripts'
-        src: '{,*/}*.coffee'
-        dest: '.tmp/scripts'
-        ext: '.js'
-      } ]
-      test: files: [ {
-        expand: true
-        cwd: 'test/spec'
-        src: '{,*/}*.coffee'
-        dest: '.tmp/spec'
-        ext: '.js'
-      } ]
-    csscomb: dist: files: 'app/styles/main.scss': [ 'app/styles/main.scss' ]
+        cwd: 'app/styles/'
+        src: '*.scss'
+        dest: 'app/styles/'
     postcss:
       options:
         map: false
+        parser: require('postcss-scss')
         processors: [
+          require('precss')()
           require('autoprefixer')(browsers: 'last 3 versions')
           require('postcss-cssnext')()
-          require('postcss-nested')()
         ]
-      server:
-        src: '<%= yeoman.app %>/styles/{,*/}*.scss'
-        dest: '.tmp/styles/main.css'
       dist:
-        src: '<%= yeoman.app %>/styles/{,*/}*.scss'
+        src: '<%= yeoman.app %>/styles/main.scss'
         dest: '.tmp/styles/main.css'
-    requirejs: dist: options:
-      almond: true
-      replaceRequireScript: [ {
-        files: [ '<%= yeoman.dist %>/index.html' ]
-        module: 'main'
-      } ]
-      modules: [ { name: 'main' } ]
-      baseUrl: '<%= yeoman.app %>/scripts'
-      paths: 'main': '../../.tmp/scripts/main'
-      keepBuildDir: true
-      allowSourceOverwrites: true
-      mainConfigFile: '.tmp/scripts/main.js'
-      dir: '.tmp/scripts'
-      optimize: 'none'
-      useStrict: true
-      wrap: true
-    uglify: dist: files: '<%= yeoman.dist %>/scripts/main.js': [ '.tmp/scripts/main.js' ]
+    requirejs:
+      dist:
+        options:
+          almond: true
+          replaceRequireScript: [ {
+            files: [ '<%= yeoman.dist %>/index.html' ]
+            module: 'main'
+          } ]
+          modules: [ { name: 'main' } ]
+          baseUrl: '<%= yeoman.app %>/scripts'
+          paths: 'main': '../../.tmp/scripts/main'
+          keepBuildDir: true
+          allowSourceOverwrites: true
+          mainConfigFile: '.tmp/scripts/main.js'
+          dir: '.tmp/scripts'
+          optimize: 'none'
+          useStrict: true
+          wrap: true
+    uglify:
+      dist:
+        files: '<%= yeoman.dist %>/main.js': [ '.tmp/scripts/main.js' ]
     useminPrepare:
       html: '<%= yeoman.app %>/index.html'
       options: dest: '<%= yeoman.dist %>'
     usemin:
       html: [ '<%= yeoman.dist %>/{,*/}*.html' ]
       css: [ '<%= yeoman.dist %>/styles/{,*/}*.css' ]
-      options: dirs: [ '<%= yeoman.dist %>' ]
-    imagemin: dist: files: [ {
-      expand: true
-      cwd: '<%= yeoman.app %>/images'
-      src: '{,*/}*.{png,jpg,jpeg}'
-      dest: '<%= yeoman.dist %>/images'
-    } ]
-    cssmin: dist: files: '<%= yeoman.dist %>/styles/main.css': [
-      '.tmp/styles/{,*/}*.css'
-      '<%= yeoman.app %>/styles/{,*/}*.css'
-    ]
-    htmlmin: dist:
-      options: {}
-      files: [ {
-        expand: true
-        cwd: '<%= yeoman.app %>'
-        src: '*.html'
-        dest: '<%= yeoman.dist %>'
-      } ]
-    copy: dist: files: [ {
-      expand: true
-      dot: true
-      cwd: '<%= yeoman.app %>'
-      dest: '<%= yeoman.dist %>'
-      src: [
-        '*.{ico,txt}'
-        'images/{,*/}*.{webp,gif}'
-        'styles/fonts/{,*/}*.*'
-      ]
-    } ]
-    bower: all: rjsConfig: '<%= yeoman.app %>/scripts/main.js'
+      options:
+        dirs: [ '<%= yeoman.dist %>' ]
+    imagemin:
+      dist:
+        files: [ {
+          expand: true
+          cwd: '<%= yeoman.app %>/images'
+          src: '{,*/}*.{png,jpg,jpeg}'
+          dest: '<%= yeoman.dist %>'
+        } ]
+    cssmin:
+      dist:
+        files: '<%= yeoman.dist %>/main.css': '.tmp/styles/main.css'
+    htmlmin:
+      dist:
+        options: {}
+        files: [ {
+          expand: true
+          cwd: '<%= yeoman.app %>'
+          src: '*.html'
+          dest: '<%= yeoman.dist %>'
+        } ]
+    copy:
+      dist:
+        files: [ {
+          expand: true
+          dot: true
+          cwd: '<%= yeoman.app %>'
+          dest: '<%= yeoman.dist %>'
+          src: [
+            '*.{ico,txt}'
+            'images/{,*/}*.{webp,gif}'
+            'styles/fonts/{,*/}*.*'
+          ]
+        } ]
+      dev:
+        files: [ {
+          expand: true
+          dot: true
+          cwd: '<%= yeoman.app %>'
+          dest: '<%= yeoman.dist %>'
+          src: [
+            '*.{ico,txt}'
+            'images/{,*/}*.{webp,gif}'
+            'styles/fonts/{,*/}*.*'
+          ]
+        },
+        {
+          expand: true
+          dot: true
+          cwd: '.tmp/concat/styles'
+          dest: '<%= yeoman.dist %>'
+          src: 'main.css'
+        },
+        {
+          expand: true
+          dot: true
+          cwd: '.tmp/scripts'
+          dest: '<%= yeoman.dist %>'
+          src: 'main.js'
+        } ]
+    bower:
+      all:
+        rjsConfig: '<%= yeoman.app %>/scripts/main.js'
     jst:
-      options: amd: true
-      compile: files: '.tmp/scripts/templates.js': [ '<%= yeoman.app %>/scripts/templates/*.ejs' ]
+      options:
+        amd: true
+        templateSettings:
+          variable: 'data'
+      compile:
+        files: '.tmp/scripts/templates.js': [ '<%= yeoman.app %>/scripts/templates/*.ejs' ]
+
   grunt.registerTask 'createDefaultTemplate', ->
     grunt.file.write '.tmp/scripts/templates.js', 'this.JST = this.JST || {};'
-    return
+
   grunt.registerTask 'server', (target) ->
     grunt.log.warn 'The `server` task has been deprecated. Use `grunt serve` to start a server.'
     grunt.task.run [ 'serve' + (if target then ':' + target else '') ]
-    return
+
   grunt.registerTask 'serve', (target) ->
     if target == 'test'
       return grunt.task.run([
@@ -208,7 +266,7 @@ module.exports = (grunt) ->
         'coffee'
         'createDefaultTemplate'
         'jst'
-        'postcss:server'
+        'postcss'
         'connect:test'
         'open:test'
         'watch'
@@ -218,11 +276,11 @@ module.exports = (grunt) ->
       'coffee:dist'
       'createDefaultTemplate'
       'jst'
-      'postcss:server'
+      'postcss'
       'connect:livereload'
       'watch'
     ]
-    return
+
   grunt.registerTask 'test', (isConnected) ->
     isConnected = Boolean(isConnected)
     testTasks = [
@@ -240,12 +298,13 @@ module.exports = (grunt) ->
       # already connected so not going to connect again, remove the connect:test task
       testTasks.splice testTasks.indexOf('connect:test'), 1
       grunt.task.run testTasks
+
   grunt.registerTask 'build', [
     'clean:dist'
     'coffee'
     'createDefaultTemplate'
     'jst'
-    'postcss:dist'
+    'postcss'
     'useminPrepare'
     'imagemin'
     'htmlmin'
@@ -253,10 +312,27 @@ module.exports = (grunt) ->
     'cssmin'
     'requirejs'
     'uglify'
-    'copy'
-    'clean:afterbuild'
+    'copy:dist'
+    'clean:aftercopy'
     'usemin'
   ]
+
+  grunt.registerTask 'dev', [
+    'clean:dist'
+    'coffee'
+    'createDefaultTemplate'
+    'jst'
+    'postcss'
+    'useminPrepare'
+    'imagemin'
+    'htmlmin'
+    'concat'
+    'requirejs'
+    'copy:dev'
+    'clean:aftercopy'
+    'usemin'
+  ]
+
   grunt.registerTask 'default', [
     'jshint'
     'test'
