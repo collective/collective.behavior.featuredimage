@@ -4,6 +4,16 @@
 
     position: absolute;
 
+    &.light
+    {
+        color: black;
+    }
+
+    &.dark
+    {
+        color: white;
+    }
+
     .quote
     {
         position: absolute;
