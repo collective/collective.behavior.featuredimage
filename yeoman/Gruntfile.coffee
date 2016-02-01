@@ -99,10 +99,7 @@ module.exports = (grunt) ->
         '<%= yeoman.dist %>/*'
       ]
       server: '.tmp'
-      aftercopy: [
-        '<%= yeoman.dist %>/*.html'
-        '<%= yeoman.dist %>/styles'
-      ]
+      aftercopy: '<%= yeoman.dist %>/*.html'
     jshint:
       options:
         jshintrc: '.jshintrc'
@@ -173,7 +170,10 @@ module.exports = (grunt) ->
           wrap: true
     uglify:
       dist:
-        files: '<%= yeoman.dist %>/main.js': [ '.tmp/scripts/main.js' ]
+        files: '<%= yeoman.dist %>/main.js': [
+          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          '.tmp/scripts/main.js'
+        ]
     useminPrepare:
       html: '<%= yeoman.app %>/index.html'
       options: dest: '<%= yeoman.dist %>'
@@ -192,7 +192,10 @@ module.exports = (grunt) ->
         } ]
     cssmin:
       dist:
-        files: '<%= yeoman.dist %>/main.css': '.tmp/styles/main.css'
+        files: '<%= yeoman.dist %>/main.css': [
+          '<%= yeoman.app %>/styles/{,*/}*.css'
+          '.tmp/styles/main.css'
+        ]
     htmlmin:
       dist:
         options: {}
@@ -309,7 +312,7 @@ module.exports = (grunt) ->
     'imagemin'
     'htmlmin'
     'concat'
-    'cssmin'
+    'cssmin:dist'
     'requirejs'
     'uglify'
     'copy:dist'
