@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
+from collective.behavior.featuredimage.interfaces import IPackageSettings
+from plone import api
 from zope.publisher.browser import BrowserView
 
 
 class FeaturedImage(BrowserView):
 
     """View featured image html"""
+
+    def theme(self):
+        """Return theme"""
+        return api.portal.get_registry_record(
+            IPackageSettings.__identifier__ + '.theme'
+        )
 
     def quote(self):
         """Return quote"""

@@ -39,4 +39,10 @@
       handler="collective.behavior.featuredimage.subscriber.update_featuredimage"
       />
 
+  <utility
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      component=".vocabulary.ThemeVocabulary"
+      name="collective.behavior.featuredimage.Theme"
+      />
+
 </configure>

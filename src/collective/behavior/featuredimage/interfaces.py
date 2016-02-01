@@ -19,3 +19,10 @@ class IPackageSettings(form.Schema):
         description=_(u'Base image used to create featured image.'),
         required=False,
     )
+
+    theme = schema.Choice(
+        title=_(u'Theme'),
+        vocabulary='collective.behavior.featuredimage.Theme',
+        default=u'light',
+        required=True
+    )
