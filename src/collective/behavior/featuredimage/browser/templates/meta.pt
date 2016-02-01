@@ -1,12 +1,5 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-    xml:lang="en"
-    xmlns:tal="http://xml.zope.org/namespaces/tal"
-    xmlns:metal="http://xml.zope.org/namespaces/metal"
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    lang="en"
-    i18n:domain="collective.behavior.featuredimage"
-    tal:omit-tag=""
+<head tal:omit-tag=""
     tal:condition="context/featuredimage_enabled">
     <meta property="og:image" tal:attributes="content string:${context/absolute_url}/@@download/featured_image">
     <meta name="twitter:image" tal:attributes="href string:${context/absolute_url}/@@download/featured_image" />
-</html>
+</head>
