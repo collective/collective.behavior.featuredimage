@@ -4,6 +4,7 @@
     "appName": "CollectiveBehaviorFeaturedimage",
     "testFramework": "mocha",
     "templateFramework": "lodash",
+    "sassBootstrap": false,
     "includeRequireJS": true,
     "coffee": false
   },

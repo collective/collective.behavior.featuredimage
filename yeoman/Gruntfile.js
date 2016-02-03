@@ -36,6 +36,14 @@ module.exports = function (grunt) {
         nospawn: true,
         livereload: LIVERELOAD_PORT
       },
+      babel: {
+        files: [ '<%= yeoman.app %>/scripts/{,*/}*.es6' ],
+        tasks: [ 'babel:dist' ]
+      },
+      babelTest: {
+        files: [ 'test/spec/{,*/}*.es6' ],
+          tasks: [ 'babel:test' ]
+      },
       postcss: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.scss'],
         tasks: ['csscomb', 'postcss']
@@ -119,8 +127,7 @@ module.exports = function (grunt) {
       dist: ['.tmp', '<%= yeoman.dist %>/*'],
       server: '.tmp',
       aftercopy: [
-        '<%= yeoman.dist %>/*.html',
-        '<%= yeoman.app %>/scripts/templates.js'
+        '<%= yeoman.dist %>/*.html'
       ]
     },
     jshint: {
@@ -141,6 +148,30 @@ module.exports = function (grunt) {
           run: true,
           urls: ['http://localhost:<%= connect.test.options.port %>/index.html']
         }
+      }
+    },
+    babel: {
+      options: {
+        sourceMap: true,
+        presets: ['es2015']
+      },
+      dist: {
+        files: [ {
+          expand: true,
+          cwd: '<%= yeoman.app %>/scripts',
+          src: '{,*/}*.es6',
+          dest: '.tmp/scripts',
+          ext: '.js'
+        } ]
+      },
+      test: {
+        files: [ {
+          expand: true,
+          cwd: 'test/spec',
+          src: '{,*/}*.es6',
+          dest: '.tmp/spec',
+          ext: '.js'
+        } ]
       }
     },
     csscomb: {
@@ -179,8 +210,12 @@ module.exports = function (grunt) {
 
           modules: [{name: 'main'}],
           baseUrl: '<%= yeoman.app %>/scripts',
-
-          mainConfigFile: '<%= yeoman.app %>/scripts/main.js', // contains path specifications and nothing else important with respect to config
+          paths: {
+            'main': '../../.tmp/scripts/main'
+          },
+          keepBuildDir: true,
+          allowSourceOverwrites: true,
+          mainConfigFile: '.tmp/scripts/main.js', // contains path specifications and nothing else important with respect to config
 
           dir: '.tmp/scripts',
 
@@ -306,17 +341,16 @@ module.exports = function (grunt) {
           variable: 'data'
         }
       },
-      serve: {
+      compile: {
         files: {
           '.tmp/scripts/templates.js': ['<%= yeoman.app %>/scripts/templates/*.ejs']
         }
-      },
-      compile: {
-        files: {
-          '<%= yeoman.app %>/scripts/templates.js': ['<%= yeoman.app %>/scripts/templates/*.ejs']
-        }
       }
     }
+  });
+
+  grunt.registerTask('createDefaultTemplate', function () {
+    grunt.file.write('.tmp/scripts/templates.js', 'this.JST = this.JST || {};');
   });
 
   grunt.registerTask('server', function (target) {
@@ -328,7 +362,9 @@ module.exports = function (grunt) {
     if (target === 'test') {
       return grunt.task.run([
         'clean:server',
-        'jst:serve',
+        'babel',
+        'createDefaultTemplate',
+        'jst',
         'postcss',
         'connect:test',
         'open:test',
@@ -338,7 +374,9 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'jst:serve',
+      'babel:dist',
+      'createDefaultTemplate',
+      'jst',
       'postcss',
       'connect:livereload',
       'watch'
@@ -349,7 +387,9 @@ module.exports = function (grunt) {
     isConnected = Boolean(isConnected);
     var testTasks = [
       'clean:server',
-      'jst:serve',
+      'babel',
+      'createDefaultTemplate',
+      'jst',
       'postcss',
       'connect:test',
       'mocha'
@@ -366,6 +406,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'babel',
+    'createDefaultTemplate',
     'jst',
     'postcss',
     'useminPrepare',
@@ -382,6 +424,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('dev', [
     'clean:dist',
+    'babel',
+    'createDefaultTemplate',
     'jst',
     'postcss',
     'useminPrepare',
