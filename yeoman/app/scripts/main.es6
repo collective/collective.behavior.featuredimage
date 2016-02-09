@@ -1,7 +1,7 @@
 /*global require*/
-'use strict';
+"use strict";
 
-define('jquery', [], function() {
+define('jquery', [], () => {
   return jQuery;
 });
 
@@ -15,7 +15,7 @@ require.config({
 require([
   'backbone',
   'views/behaviorform'
-], function(Backbone, AppView) {
+], (Backbone, AppView) => {
   Backbone.history.start();
   if ($('#fieldset-featured-image').length > 0) {
     return new AppView();

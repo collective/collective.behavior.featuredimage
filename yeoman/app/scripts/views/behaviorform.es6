@@ -5,16 +5,16 @@ define([
   'underscore',
   'backbone',
   'templates'
-], function ($, _, Backbone, JST) {
-  'use strict';
+], ($, _, Backbone, JST) => {
+  "use strict";
 
-  var BehaviorformView = Backbone.View.extend({
+  const BehaviorformView = Backbone.View.extend({
     template: JST['app/scripts/templates/behaviorform.ejs'],
 
     tagName: 'div',
     id: 'featuredimage-preview',
 
-    initialize: function() {
+    initialize() {
       this.render();
       $('#fieldset-featured-image').append(this.el);
       this.$iframe = this.$('iframe');
@@ -25,37 +25,37 @@ define([
       this.$author.on('input', this.updateFeaturedImage(this));
     },
 
-    render: function() {
-      var data;
+    render() {
+      let data;
       data = {
         source: 'featuredimage.html'
       };
       if (location.port !== "9000") {
-        data.source = ($('head base').attr('href')) + "/@@featuredimage";
+        data.source = `${$('head base').attr('href')}/@@featuredimage`;
       }
       this.$el.html(this.template(data));
     },
 
-    iframeready: (function(_this) {
+    iframeready(_this) {
       return function() {
         _this.$featuredimage = $('#featuredimage', _this.$iframe[0].contentWindow.document.body);
         _this.$el.width(_this.$featuredimage.width() / 2 + 10);
         _this.$el.height(_this.$featuredimage.height() / 2 + 10);
         _this.$iframe.width(_this.$featuredimage.width() + 10);
         _this.$iframe.height(_this.$featuredimage.height() + 10);
-        _this.updateFeaturedImage();
+        _this.updateFeaturedImage(_this)();
       };
-    }),
+    },
 
-    updateFeaturedImage: (function(_this) {
+    updateFeaturedImage(_this) {
       return function() {
-        var $iframeAuthor, $iframeQuote;
+        let $iframeAuthor, $iframeQuote;
         $iframeQuote = $('.quote .text', _this.$featuredimage);
         $iframeAuthor = $('.quote .author', _this.$featuredimage);
         $iframeQuote.html(_this.$quote.val());
         $iframeAuthor.html(_this.$author.val());
       };
-    })
+    }
   });
   return BehaviorformView;
 });
