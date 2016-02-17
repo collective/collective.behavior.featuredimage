@@ -1,0 +1,103 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2016-02-17 19:55+0000\n"
+"PO-Revision-Date: 2016-02-17 18:01-0200\n"
+"Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+"Language: es\n"
+"X-Generator: Poedit 1.8.4\n"
+
+#: collective/behavior/featuredimage/profiles.zcml:14
+msgid "A behavior for Dexterity-based content types to add a featured image for sharing content on social media."
+msgstr "Un behavior para tipos de contenido Dexterity que adiciona una imagen de destaque para ser compartida en redes sociales."
+
+#: collective/behavior/featuredimage/behaviors/interfaces.py:39
+msgid "Author"
+msgstr "Autor"
+
+#: collective/behavior/featuredimage/interfaces.py:18
+msgid "Base image"
+msgstr "Imagen base"
+
+#: collective/behavior/featuredimage/interfaces.py:19
+msgid "Base image used to create featured image."
+msgstr "La imagen base que será usada para crear la imagen de destaque."
+
+#: collective/behavior/featuredimage/vocabulary.py:13
+msgid "Custom"
+msgstr "Personalizado"
+
+#: collective/behavior/featuredimage/vocabulary.py:12
+msgid "Dark"
+msgstr "Oscuro"
+
+#: collective/behavior/featuredimage/behaviors/interfaces.py:27
+msgid "Enable Featured Image"
+msgstr "Habilitar la imagen de destaque"
+
+#: collective/behavior/featuredimage/behaviors/interfaces.py:28
+msgid "Enable featured image for this content"
+msgstr "Habilitar la imagen de destaque para este tipo de contenido."
+
+#: collective/behavior/featuredimage/testing.zcml:16
+msgid "Extension profile to configure a test fixture."
+msgstr ""
+
+#: collective/behavior/featuredimage/behaviors/configure.zcml:14
+msgid "Extra fields to get Featured Image."
+msgstr "Campos adicionales para obtener una imagen de destaque."
+
+#: collective/behavior/featuredimage/behaviors/configure.zcml:14
+#: collective/behavior/featuredimage/behaviors/interfaces.py:17
+#: collective/behavior/featuredimage/controlpanel.py:11
+msgid "Featured Image"
+msgstr "Imagen de destaque"
+
+#: collective/behavior/featuredimage/vocabulary.py:11
+msgid "Light"
+msgstr "Claro"
+
+#: collective/behavior/featuredimage/behaviors/interfaces.py:34
+msgid "Quote"
+msgstr "Cita"
+
+#: collective/behavior/featuredimage/profiles.zcml:23
+msgid "Remove Featured Image"
+msgstr "Desinstalar Imagen de destaque"
+
+#: collective/behavior/featuredimage/controlpanel.py:12
+msgid "Settings of the Featured Image."
+msgstr "Configuración de la Imagen de destaque."
+
+#: collective/behavior/featuredimage/interfaces.py:24
+msgid "Theme"
+msgstr "Tema"
+
+#: collective/behavior/featuredimage/profiles.zcml:23
+msgid "Uninstalls collective.behavior.featuredimage."
+msgstr "Desinstala collective.behavior.featuredimage."
+
+#: collective/behavior/featuredimage/upgrades/v2/configure.zcml:15
+msgid "Upgrades package to v2"
+msgstr ""
+
+#: collective/behavior/featuredimage/profiles/default/controlpanel.xml
+msgid "collective.behavior.featuredimage"
+msgstr ""
+
+#: collective/behavior/featuredimage/testing.zcml:16
+msgid "collective.behavior.featuredimage: Test Fixture"
+msgstr ""
+
+#: collective/behavior/featuredimage/upgrades/v2/configure.zcml:15
+msgid "collective.behavior.featuredimage: v2"
+msgstr ""

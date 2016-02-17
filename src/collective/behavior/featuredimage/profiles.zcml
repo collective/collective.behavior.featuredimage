@@ -6,16 +6,16 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="collective.behavior.featuredimage"
+      title="Featured Image"
       directory="profiles/default"
-      description="Installs collective.behavior.featuredimage."
+      description="A behavior for Dexterity-based content types to add a featured image for sharing content on social media."
       provides="Products.GenericSetup.interfaces.EXTENSION"
       i18n:attributes="title; description"
       />
 
   <genericsetup:registerProfile
       name="uninstall"
-      title="collective.behavior.featuredimage: Remoção do Pacote"
+      title="Remove Featured Image"
       directory="profiles/uninstall"
       description="Uninstalls collective.behavior.featuredimage."
       provides="Products.GenericSetup.interfaces.EXTENSION"
