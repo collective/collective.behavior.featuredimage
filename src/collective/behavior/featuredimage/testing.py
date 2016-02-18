@@ -14,22 +14,17 @@ from plone.formwidget.namedfile.converter import b64encode_file
 from plone.testing import z2
 
 import os
-import shutil
 
 PLONE_VERSION = api.env.plone_version()
 
 
-def load_file(name, size=0):
-    """Load file from testing directory"""
-    path = '/tmp/{0}'.format(name)
+def get_encoded_image(filename):
+    """Return image encoded in base64."""
+    cwd = os.path.abspath(os.path.dirname(__file__))
+    path = os.path.join(cwd, 'tests', filename)
     with open(path, 'rb') as f:
         data = f.read()
-    return data
-
-
-def encode_image(image):
-    """Return image encoded in base64"""
-    return b64encode_file(image, load_file(image))
+    return b64encode_file(filename, data)
 
 
 class Fixture(PloneSandboxLayer):
@@ -52,10 +47,6 @@ class Fixture(PloneSandboxLayer):
         self.applyProfile(portal, 'collective.behavior.featuredimage:default')
         self.applyProfile(portal, 'collective.behavior.featuredimage:testfixture')
 
-        current_dir = os.path.abspath(os.path.dirname(__file__))
-        img_path = os.path.join(current_dir, 'tests', 'featuredimage-base.png')
-        shutil.copy2(img_path, '/tmp')
-
 
 class RobotFixture(Fixture):
 
@@ -65,7 +56,7 @@ class RobotFixture(Fixture):
         super(RobotFixture, self).setUpPloneSite(portal)
         api.portal.set_registry_record(
             IPackageSettings.__identifier__ + '.base_image',
-            encode_image('featuredimage-base.png')
+            get_encoded_image('featuredimage-base.png')
         )
 
 
