@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from collective.behavior.featuredimage import _
+from collective.behavior.featuredimage.utils import validate_base_image
 from plone.directives import form
 from zope import schema
 from zope.interface import Interface
@@ -17,7 +18,8 @@ class IPackageSettings(form.Schema):
     base_image = schema.ASCII(
         title=_(u'Base image'),
         description=_(u'Base image used to create featured image.'),
-        required=False,
+        required=True,
+        constraint=validate_base_image
     )
 
     theme = schema.Choice(
