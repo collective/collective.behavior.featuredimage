@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+"""Setup testing infrastructure.
+
+For Plone 5 we need to manually install plone.app.contenttypes.
+"""
 from collective.behavior.featuredimage.interfaces import IPackageSettings
 from plone import api
 from plone.app.robotframework.testing import AUTOLOGIN_LIBRARY_FIXTURE
@@ -11,6 +15,8 @@ from plone.testing import z2
 
 import os
 import shutil
+
+PLONE_VERSION = api.env.plone_version()
 
 
 def load_file(name, size=0):
@@ -31,16 +37,20 @@ class Fixture(PloneSandboxLayer):
     defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        # Load ZCML
+        if PLONE_VERSION >= '5.0':
+            import plone.app.contenttypes
+            self.loadZCML(package=plone.app.contenttypes)
+
         import collective.behavior.featuredimage
         self.loadZCML(package=collective.behavior.featuredimage)
         self.loadZCML(package=collective.behavior.featuredimage, name='testing.zcml')
 
     def setUpPloneSite(self, portal):
-        self.applyProfile(
-            portal, 'collective.behavior.featuredimage:default')
-        self.applyProfile(
-            portal, 'collective.behavior.featuredimage:testfixture')
+        if PLONE_VERSION >= '5.0':
+            self.applyProfile(portal, 'plone.app.contenttypes:default')
+
+        self.applyProfile(portal, 'collective.behavior.featuredimage:default')
+        self.applyProfile(portal, 'collective.behavior.featuredimage:testfixture')
 
         current_dir = os.path.abspath(os.path.dirname(__file__))
         img_path = os.path.join(current_dir, 'tests', 'featuredimage-base.png')
