@@ -30,7 +30,7 @@
 
   <subscriber
       for="collective.behavior.featuredimage.behaviors.interfaces.IFeaturedImage
-           zope.lifecycleevent.IObjectAddedEvent"
+           Products.CMFCore.interfaces.IActionSucceededEvent"
       handler="collective.behavior.featuredimage.subscriber.update_featuredimage"
       />
 

@@ -7,7 +7,7 @@
       name="featuredimage"
       class=".views.FeaturedImage"
       template="templates/featuredimage.pt"
-      permission="zope.Public"
+      permission="zope2.Public"
       layer="collective.behavior.featuredimage.interfaces.IBrowserLayer"
       />
 
@@ -16,7 +16,7 @@
       name="featuredimage"
       class=".views.FeaturedImage"
       template="templates/featuredimage.pt"
-      permission="zope.Public"
+      permission="zope2.Public"
       layer="collective.behavior.featuredimage.interfaces.IBrowserLayer"
       />
 
