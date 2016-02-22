@@ -3,6 +3,15 @@
     i18n_domain="collective.behavior.featuredimage" >
 
   <browser:page
+      for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+      name="featuredimage"
+      class=".views.FeaturedImage"
+      template="templates/featuredimage.pt"
+      permission="zope.Public"
+      layer="collective.behavior.featuredimage.interfaces.IBrowserLayer"
+      />
+
+  <browser:page
       for="collective.behavior.featuredimage.behaviors.interfaces.IFeaturedImage"
       name="featuredimage"
       class=".views.FeaturedImage"

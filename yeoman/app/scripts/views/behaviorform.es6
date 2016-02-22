@@ -33,17 +33,25 @@ define([
       if (location.port !== "9000") {
         data.source = `${$('head base').attr('href')}/@@featuredimage`;
       }
+      data.source = data.source.replace(/\/\//g, '/');
+      data.source = data.source.replace(/http\:\//g, 'http://');
       this.$el.html(this.template(data));
     },
 
     iframeready(_this) {
       return function() {
+        let screenImage, theImage;
         _this.$featuredimage = $('#featuredimage', _this.$iframe[0].contentWindow.document.body);
-        _this.$el.width(_this.$featuredimage.width() / 2 + 10);
-        _this.$el.height(_this.$featuredimage.height() / 2 + 10);
-        _this.$iframe.width(_this.$featuredimage.width() + 10);
-        _this.$iframe.height(_this.$featuredimage.height() + 10);
-        _this.updateFeaturedImage(_this)();
+        screenImage = $('img', _this.$featuredimage);
+        theImage = new Image();
+        theImage.src = screenImage.attr('src');
+        theImage.onload = function() {
+          _this.$el.width(this.width / 2 + 10);
+          _this.$el.height(this.height / 2 + 10);
+          _this.$iframe.width(this.width + 10);
+          _this.$iframe.height(this.height + 10);
+          _this.updateFeaturedImage(_this)();
+        }
       };
     },
 

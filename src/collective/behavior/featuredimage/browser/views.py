@@ -16,12 +16,12 @@ class FeaturedImage(BrowserView):
 
     def quote(self):
         """Return quote"""
-        if not self.context.featuredimage_quote:
+        if getattr(self.context, 'featuredimage_quote', None) is None:
             return self.context.Title()
         return self.context.featuredimage_quote
 
     def author(self):
         """Return author"""
-        if not self.context.featuredimage_author:
+        if getattr(self.context, 'featuredimage_author', None) is None:
             return self.context.Creator()
         return self.context.featuredimage_author
