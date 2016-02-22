@@ -10,6 +10,8 @@ import transaction
 def _get_screenshot(page):
     """Get screenshot of Fetured Image"""
     driver = webdriver.PhantomJS()
+    # Use minimun image size while don't break image proportion
+    driver.set_window_size(1300, 1300)
     driver.get(page)
     data = driver.get_screenshot_as_png()
     # crop image
