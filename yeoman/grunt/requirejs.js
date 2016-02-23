@@ -23,7 +23,6 @@ module.exports = {
       optimize: 'none', // optimize by uglify task
       useStrict: true,
       wrap: true
-
     }
   }
 };

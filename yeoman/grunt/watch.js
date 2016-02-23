@@ -5,16 +5,34 @@ module.exports = function(grunt, options){
       livereload: grunt.LIVERELOAD_PORT
     },
     babel: {
-      files: [ '<%= yeoman.app %>/scripts/{,*/}*.es6' ],
-      tasks: [ 'babel:dist' ]
+      files: [ '<%= yeoman.app %>/scripts/{,*/}*.js' ],
+      tasks: [
+        'babel:dist',
+        'createDefaultTemplate',
+        'jst',
+        'useminPrepare',
+        'htmlmin',
+        'concat',
+        'requirejs',
+        'copy:dev',
+        'clean:aftercopy'
+      ]
     },
     babelTest: {
-      files: [ 'test/spec/{,*/}*.es6' ],
+      files: [ 'test/spec/{,*/}*.js' ],
         tasks: [ 'babel:test' ]
     },
     postcss: {
       files: ['<%= yeoman.app %>/styles/{,*/}*.scss'],
-      tasks: ['csscomb', 'postcss']
+      tasks: [
+        'csscomb',
+        'postcss',
+        'useminPrepare',
+        'htmlmin',
+        'concat',
+        'copy:dev',
+        'clean:aftercopy'
+      ]
     },
     livereload: {
       options: {
@@ -34,10 +52,6 @@ module.exports = function(grunt, options){
         '<%= yeoman.app %>/scripts/templates/*.ejs'
       ],
       tasks: ['jst']
-    },
-    test: {
-      files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'test/spec/**/*.js'],
-      tasks: ['test:true']
     }
   };
 };

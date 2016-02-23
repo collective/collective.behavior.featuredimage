@@ -7,7 +7,7 @@ module.exports = {
     files: [ {
       expand: true,
       cwd: '<%= yeoman.app %>/scripts',
-      src: '{,*/}*.es6',
+      src: '{,*/}*.js',
       dest: '.tmp/scripts',
       ext: '.js'
     } ]
@@ -16,7 +16,7 @@ module.exports = {
     files: [ {
       expand: true,
       cwd: 'test/spec',
-      src: '{,*/}*.es6',
+      src: '{,*/}*.js',
       dest: '.tmp/spec',
       ext: '.js'
     } ]
