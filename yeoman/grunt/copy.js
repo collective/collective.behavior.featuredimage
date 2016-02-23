@@ -18,11 +18,19 @@ module.exports = {
       dot: true,
       cwd: '<%= yeoman.app %>',
       dest: '<%= yeoman.dist %>',
-      src: [
-        '*.{ico,txt}',
-        'images/{,*/}*.{webp,gif}',
-        'styles/fonts/{,*/}*.*'
-      ]
+      src: '*.{ico,txt}'
+    }, {
+      expand: true,
+      dot: true,
+      cwd: '<%= yeoman.app %>/styles/fonts',
+      dest: '<%= yeoman.dist %>',
+      src: '{,*/}*.*'
+    }, {
+      expand: true,
+      dot: true,
+      cwd: '<%= yeoman.app %>/images',
+      dest: '<%= yeoman.dist %>',
+      src: '{,*/}*.{png,jpg,jpeg,webp,gif}'
     }, {
       expand: true,
       dot: true,

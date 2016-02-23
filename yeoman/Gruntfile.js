@@ -34,36 +34,6 @@ module.exports = function (grunt) {
     grunt.file.write('.tmp/scripts/templates.js', 'this.JST = this.JST || {};');
   });
 
-  grunt.registerTask('server', function (target) {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve' + (target ? ':' + target : '')]);
-  });
-
-  grunt.registerTask('serve', function (target) {
-    if (target === 'test') {
-      return grunt.task.run([
-        'clean:server',
-        'babel',
-        'createDefaultTemplate',
-        'jst',
-        'postcss',
-        'connect:test',
-        'open:test',
-        'watch'
-      ]);
-    }
-
-    grunt.task.run([
-      'clean:server',
-      'babel:dist',
-      'createDefaultTemplate',
-      'jst',
-      'postcss',
-      'connect:livereload',
-      'watch'
-    ]);
-  });
-
   grunt.registerTask('test', function (isConnected) {
     isConnected = Boolean(isConnected);
     var testTasks = [
@@ -105,18 +75,16 @@ module.exports = function (grunt) {
 
   grunt.registerTask('dev', [
     'clean:dist',
-    'babel',
+    'babel:dist',
     'createDefaultTemplate',
     'jst',
     'postcss',
     'useminPrepare',
-    'imagemin',
     'htmlmin',
     'concat',
     'requirejs',
     'copy:dev',
-    'clean:aftercopy',
-    'usemin'
+    'clean:aftercopy'
   ]);
 
   grunt.registerTask('default', [

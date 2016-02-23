@@ -136,11 +136,11 @@ Development
 
 The buildout configuration already installs PhantomJS and makes it available by updating the `PATH` environment variable.
 
-We use yeoman and grunt to build static files, to start grunt serve run:
+We use yeoman and grunt to build static files, to start grunt watch run:
 
 .. code-block:: console
 
-    buildout_dir$ ./bin/grunt_serve
+    buildout_dir$ ./bin/grunt_watch
 
 Then open the browser at http://localhost:9000 and edit the files at directory yeoman/app to customize the static files.
 
