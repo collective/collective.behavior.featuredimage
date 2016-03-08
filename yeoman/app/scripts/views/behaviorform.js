@@ -31,7 +31,11 @@ define([
         source: 'featuredimage.html'
       };
       if (location.port !== "9000") {
-        data.source = `${$('head base').attr('href')}/@@featuredimage`;
+        if (location.href.indexOf('++add++') > 0) {
+          data.source = `${portal_url}/@@featuredimage`;
+        } else {
+          data.source = `${$('head base').attr('href')}/@@featuredimage`;
+        }
       }
       data.source = data.source.replace(/\/\//g, '/');
       data.source = data.source.replace(/http\:\//g, 'http://');
