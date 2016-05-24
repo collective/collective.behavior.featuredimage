@@ -54,8 +54,7 @@ class TestUpgrade(BaseTestCase):
                                         self.profile,
                                         '1')
         step = [step for step in upgradeSteps
-                if (step[0]['dest'] == ('2',))
-                and (step[0]['source'] == ('1',))]
+                if (step[0]['dest'] == ('2',)) and (step[0]['source'] == ('1',))]
         self.assertEqual(len(step), 1)
 
 
