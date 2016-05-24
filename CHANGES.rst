@@ -4,4 +4,5 @@ Changelog
 1.0a1 (unreleased)
 ------------------
 
-- Initial release.
+- Fix extra space between text and quotes (pseudo element).
+  [rodfersou]
