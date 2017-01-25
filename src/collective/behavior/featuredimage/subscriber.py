@@ -4,18 +4,23 @@ from PIL import Image
 from plone.namedfile.file import NamedBlobImage
 from selenium import webdriver
 
+import signal
 import transaction
 
 
 def _get_screenshot(page):
     """Get screenshot of Fetured Image"""
-    driver = webdriver.PhantomJS()
+    browser = webdriver.PhantomJS()
     # Use minimun image size while don't break image proportion
-    driver.set_window_size(1300, 1300)
-    driver.get(page)
-    data = driver.get_screenshot_as_png()
+    browser.set_window_size(1300, 1300)
+    browser.get(page)
+    data = browser.get_screenshot_as_png()
     # crop image
-    el = driver.find_element_by_id('featuredimage')
+    el = browser.find_element_by_id('featuredimage')
+    # XXX: quit() does not terminate PhantomJS process
+    #      https://github.com/SeleniumHQ/selenium/issues/767
+    browser.service.process.send_signal(signal.SIGTERM)
+    browser.quit()
     location = el.location
     size = el.size
     im = Image.open(StringIO(data))
