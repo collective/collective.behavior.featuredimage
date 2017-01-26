@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "main": "app/main.js",
   "scripts": {
-    "dev": "./node_modules/.bin/webpack",
     "build": "./node_modules/.bin/webpack -p",
     "watch": "./node_modules/.bin/webpack --watch"
   },
