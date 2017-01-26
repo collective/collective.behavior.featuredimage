@@ -7,6 +7,9 @@ module.exports = {
   },
   module: {
     rules: [{
+      test: /\.js$/,
+      loader: 'babel-loader',
+    }, {
       test: /\.css$/,
       exclude: /node_modules/,
       loader: ExtractTextPlugin.extract({
