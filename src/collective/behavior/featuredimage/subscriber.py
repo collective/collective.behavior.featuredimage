@@ -33,7 +33,7 @@ def _get_screenshot(page):
         location['y'] + size['height']
     ))
     output = StringIO()
-    im.save(output, 'PNG')
+    im.save(output, 'PNG', optimize=True)
     data = output.getvalue()
     output.close()
     return data
