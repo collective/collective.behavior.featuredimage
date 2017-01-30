@@ -11,18 +11,21 @@ import transaction
 def _get_screenshot(page):
     """Get screenshot of Fetured Image"""
     browser = webdriver.PhantomJS()
+    browser.implicitly_wait(1)  # seconds
+
     # Use minimun image size while don't break image proportion
     browser.set_window_size(1300, 1300)
     browser.get(page)
     data = browser.get_screenshot_as_png()
-    # crop image
     el = browser.find_element_by_id('featuredimage')
+    location, size = el.location, el.size
+
     # XXX: quit() does not terminate PhantomJS process
     #      https://github.com/SeleniumHQ/selenium/issues/767
     browser.service.process.send_signal(signal.SIGTERM)
     browser.quit()
-    location = el.location
-    size = el.size
+
+    # crop image
     im = Image.open(StringIO(data))
     im = im.crop((
         location['x'], location['y'],
