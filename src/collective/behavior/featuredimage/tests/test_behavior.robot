@@ -40,15 +40,15 @@ Test CRUD
 
 *** Keywords ***
 
-Click Add Dexterity Item
+Click Add News Item
     Open Add New Menu
-    Click Link  css=a#dexterity-item
-    Page Should Contain  Dexterity Item
+    Click Link  css=a#news-item
+    Page Should Contain  News Item
 
 Create
     [arguments]  ${title}
 
-    Click Add Dexterity Item
+    Click Add News Item
     Input Text  css=${title_selector}  ${title}
     Click Link   Featured Image
     Select Checkbox  css=${featuredimage_enabled_selector}

@@ -13,28 +13,26 @@ class BehaviorsTestCase(unittest.TestCase):
         self.portal = self.layer['portal']
 
         with api.env.adopt_roles(['Manager']):
-            self.folder = api.content.create(self.portal, 'Folder', 'folder')
-
-        self.dummy1 = api.content.create(self.folder, 'Dexterity Item', 'd1')
+            self.obj = api.content.create(self.portal, 'News Item', 'foo')
 
     def test_featuredimage_behavior(self):
         from collective.behavior.featuredimage.behaviors.interfaces import IFeaturedImage
-        self.assertTrue(IFeaturedImage.providedBy(self.dummy1))
+        self.assertTrue(IFeaturedImage.providedBy(self.obj))
 
     def test_fields(self):
-        self.assertTrue(self.dummy1.featuredimage_enabled)
-        self.assertIsNone(self.dummy1.featuredimage_quote)
-        self.assertIsNone(self.dummy1.featuredimage_author)
+        self.assertTrue(self.obj.featuredimage_enabled)
+        self.assertIsNone(self.obj.featuredimage_quote)
+        self.assertIsNone(self.obj.featuredimage_author)
 
-        self.dummy1.featuredimage_enabled = True
+        self.obj.featuredimage_enabled = True
         quote = (
             u'Give me six hours to chop down a tree and '
             u'I will spend the first four sharpening the axe.'
         )
         author = u'Abraham Lincoln'
 
-        self.dummy1.featuredimage_quote = quote
-        self.dummy1.featuredimage_author = author
-        self.assertTrue(self.dummy1.featuredimage_enabled)
-        self.assertEqual(self.dummy1.featuredimage_quote, quote)
-        self.assertEqual(self.dummy1.featuredimage_author, author)
+        self.obj.featuredimage_quote = quote
+        self.obj.featuredimage_author = author
+        self.assertTrue(self.obj.featuredimage_enabled)
+        self.assertEqual(self.obj.featuredimage_quote, quote)
+        self.assertEqual(self.obj.featuredimage_author, author)

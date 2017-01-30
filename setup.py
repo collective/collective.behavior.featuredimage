@@ -50,6 +50,7 @@ setup(
     ],
     extras_require={
         'test': [
+            'plone.app.contenttypes',
             'plone.app.robotframework',
             'plone.app.testing [robot]',
             'plone.browserlayer',
