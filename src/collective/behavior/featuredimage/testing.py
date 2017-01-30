@@ -16,7 +16,7 @@ from plone.testing import z2
 
 import os
 
-PLONE_VERSION = api.env.plone_version()
+IS_PLONE_5 = api.env.plone_version().startswith('5')
 
 
 def get_encoded_image(filename):
