@@ -39,6 +39,7 @@ define([
       }
       data.source = data.source.replace(/\/\//g, '/');
       data.source = data.source.replace(/http\:\//g, 'http://');
+      data.source = data.source.replace(/https\:\//g, 'https://');
       this.$el.html(this.template(data));
     },
 
