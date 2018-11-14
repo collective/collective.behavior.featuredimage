@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2016-02-17 19:55+0000\n"
-"PO-Revision-Date: 2016-02-17 18:01-0200\n"
+"POT-Creation-Date: 2018-11-14 18:15+0000\n"
+"PO-Revision-Date: 2018-11-14 16:18-0200\n"
 "Last-Translator: Héctor Velarde <hector.velarde@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 "Language: es\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: collective/behavior/featuredimage/profiles.zcml:14
 msgid "A behavior for Dexterity-based content types to add a featured image for sharing content on social media."
@@ -24,11 +24,11 @@ msgstr "Un behavior para tipos de contenido Dexterity que adiciona una imagen de
 msgid "Author"
 msgstr "Autor"
 
-#: collective/behavior/featuredimage/interfaces.py:18
+#: collective/behavior/featuredimage/interfaces.py:19
 msgid "Base image"
 msgstr "Imagen base"
 
-#: collective/behavior/featuredimage/interfaces.py:19
+#: collective/behavior/featuredimage/interfaces.py:20
 msgid "Base image used to create featured image."
 msgstr "La imagen base que será usada para crear la imagen de destaque."
 
@@ -48,10 +48,6 @@ msgstr "Habilitar la imagen de destaque"
 msgid "Enable featured image for this content"
 msgstr "Habilitar la imagen de destaque para este tipo de contenido."
 
-#: collective/behavior/featuredimage/testing.zcml:16
-msgid "Extension profile to configure a test fixture."
-msgstr ""
-
 #: collective/behavior/featuredimage/behaviors/configure.zcml:14
 msgid "Extra fields to get Featured Image."
 msgstr "Campos adicionales para obtener una imagen de destaque."
@@ -61,6 +57,18 @@ msgstr "Campos adicionales para obtener una imagen de destaque."
 #: collective/behavior/featuredimage/controlpanel.py:11
 msgid "Featured Image"
 msgstr "Imagen de destaque"
+
+#: collective/behavior/featuredimage/utils.py:40
+msgid "Image must be at least 1200 x 630 pixels for the best display on high resolution devices."
+msgstr "La imagen debe tener dimensiones de al menos 1200 x 630 píxeles para mostrarse correctamente en dispositivos de alta resolución."
+
+#: collective/behavior/featuredimage/utils.py:35
+msgid "Image should be in PNG format."
+msgstr "La imagen debe estar en formato PNG."
+
+#: collective/behavior/featuredimage/utils.py:29
+msgid "Image should be smaller than 1MB."
+msgstr "La imagen debe ser menor de 1MB."
 
 #: collective/behavior/featuredimage/vocabulary.py:11
 msgid "Light"
@@ -78,7 +86,7 @@ msgstr "Desinstalar Imagen de destaque"
 msgid "Settings of the Featured Image."
 msgstr "Configuración de la Imagen de destaque."
 
-#: collective/behavior/featuredimage/interfaces.py:24
+#: collective/behavior/featuredimage/interfaces.py:26
 msgid "Theme"
 msgstr "Tema"
 
@@ -94,10 +102,11 @@ msgstr ""
 msgid "collective.behavior.featuredimage"
 msgstr ""
 
-#: collective/behavior/featuredimage/testing.zcml:16
-msgid "collective.behavior.featuredimage: Test Fixture"
-msgstr ""
-
 #: collective/behavior/featuredimage/upgrades/v2/configure.zcml:15
 msgid "collective.behavior.featuredimage: v2"
 msgstr ""
+
+#. Default: "An error ocurred while generating the featured image. Please revert the workflow state. The image generated can be used for further analysis."
+#: collective/behavior/featuredimage/subscriber.py:34
+msgid "featured_image_generation_error"
+msgstr "Ocurrió un error al generar la imagen de destaque. Por favor revierta el estado del workflow. La imagen generada puede ser utilizada para un análisis posterior."
