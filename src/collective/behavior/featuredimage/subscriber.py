@@ -5,8 +5,10 @@ from cStringIO import StringIO
 from PIL import Image
 from plone import api
 from plone.namedfile.file import NamedBlobImage
+from Products.CMFCore.interfaces import IActionSucceededEvent
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
+from zope.lifecycleevent import IObjectModifiedEvent
 
 import signal
 import transaction
@@ -58,9 +60,17 @@ def _get_screenshot(page, request):
 
 
 def update_featuredimage(context, event):
-    """Update Fetured Image after save content"""
+    """Update featured image at publishing time or when published only."""
     if not context.featuredimage_enabled:
         return
+
+    if IActionSucceededEvent.providedBy(event) and event.action != 'publish':
+        return
+
+    is_published = api.content.get_state(context) == 'published'
+    if IObjectModifiedEvent.providedBy(event) and not is_published:
+        return
+
     page = '{0}/@@featuredimage'.format(context.absolute_url())
     # integration tests don't work with phantomjs
     if page.startswith('http://nohost/'):
