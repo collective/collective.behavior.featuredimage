@@ -59,6 +59,16 @@ def _get_screenshot(page, request):
     return data
 
 
+def absolute_url(context, request):
+    """Skip VHM to avoid issues with web servers and intermediate proxies."""
+    absolute_url = 'http://{host}:{port}{path}'
+    return absolute_url.format(
+        host=request['SERVER_NAME'],
+        port=request['SERVER_PORT'],
+        path='/'.join(context.getPhysicalPath()),
+    )
+
+
 def update_featuredimage(context, event):
     """Update featured image at publishing time or when published only."""
     if not context.featuredimage_enabled:
@@ -71,7 +81,8 @@ def update_featuredimage(context, event):
     if IObjectModifiedEvent.providedBy(event) and not is_published:
         return
 
-    page = '{0}/@@featuredimage'.format(context.absolute_url())
+    page = absolute_url(context, context.REQUEST) + '/@@featuredimage'
+
     # integration tests don't work with phantomjs
     if page.startswith('http://nohost/'):
         return
